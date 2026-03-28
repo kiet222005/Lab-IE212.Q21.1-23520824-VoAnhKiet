@@ -3,7 +3,6 @@
 -- ==============================================================
 
 -- 0. ĐĂNG KÝ THƯ VIỆN PIGGYBANK (Để dùng CSVExcelStorage)
--- Hãy đảm bảo đường dẫn này chính xác với máy của bạn
 REGISTER /home/anhkiet/pig/lib/piggybank.jar;
 
 SET default_parallel 1;
@@ -33,7 +32,7 @@ data = FILTER raw_data BY
 -- ==============================
 -- 3. CLEAN REVIEW (CHUYỂN DẤU CÂU THÀNH KHOẢNG TRẮNG)
 -- ==============================
--- Bước này cực kỳ quan trọng để khi TOKENIZE theo khoảng trắng, từ sẽ sạch sẽ
+
 clean_data = FOREACH data GENERATE
     id,
     TRIM(
@@ -43,7 +42,7 @@ clean_data = FOREACH data GENERATE
                     REPLACE(
                         REPLACE(review, '""', ' '), 
                     '"', ' '), 
-                '[,.!?:;()\\[\\]+\\-*/]', ' '),    -- THÊM DẤU ; VÀO ĐÂY ĐỂ NÓ XÓA SẠCH
+                '[,.!?:;()\\[\\]+\\-*/]', ' '),   
             '\\n', ' '), 
         '\\r', ' ')
     ) AS review,
@@ -64,7 +63,7 @@ lower_data = FOREACH clean_data GENERATE
 -- ==============================
 -- 5. TOKENIZE (TÁCH THEO KHOẢNG TRẮNG)
 -- ==============================
--- Làm đúng yêu cầu đề bài: Tách theo khoảng trắng
+
 tokens = FOREACH lower_data GENERATE 
     id, 
     FLATTEN(TOKENIZE(review, ' ')) AS word, 
@@ -75,7 +74,6 @@ tokens = FOREACH lower_data GENERATE
 -- ==============================
 -- 6. CLEAN WORD
 -- ==============================
--- Loại bỏ các từ rỗng phát sinh trong quá trình tokenize
 tokens = FILTER tokens BY 
     (word IS NOT NULL) AND 
     (word != '') AND 
@@ -114,7 +112,6 @@ final_result = FOREACH grouped GENERATE
 -- ==============================
 -- 9. STORE
 -- ==============================
--- Lưu kết quả cuối cùng vào HDFS
 STORE final_result 
 INTO '/user/anhkiet/cleaned_data' 
 USING PigStorage(';');

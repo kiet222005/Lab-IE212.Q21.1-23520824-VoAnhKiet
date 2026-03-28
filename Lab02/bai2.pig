@@ -21,9 +21,8 @@ data = FILTER data BY
     (aspect IS NOT NULL);
 
 -- ==============================
--- 3. SPLIT WORD (ĐÃ SỬA)
+-- 3. SPLIT WORD
 -- ==============================
--- Thay STRSPLIT thành TOKENIZE để tách các từ được nối bằng dấu phẩy thành nhiều dòng
 tokens = FOREACH data GENERATE
     FLATTEN(TOKENIZE(review, ',')) AS word,
     category,
@@ -79,7 +78,6 @@ aspect_count = FOREACH grp_aspect GENERATE
 -- ==============================
 -- 9. STORE
 -- ==============================
--- Nhớ xóa các thư mục output cũ trên HDFS (nếu có) trước khi chạy lệnh này
 STORE top5_words 
 INTO '/user/anhkiet/output/bai2_top_words' 
 USING PigStorage(',');
