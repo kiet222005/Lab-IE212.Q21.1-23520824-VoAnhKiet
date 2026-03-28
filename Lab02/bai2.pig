@@ -1,35 +1,36 @@
 SET default_parallel 1;
 
 -- ==============================
--- 1. LOAD DATA
+-- 1. LOAD
 -- ==============================
 data = LOAD '/user/anhkiet/cleaned_data' USING PigStorage(';') 
 AS (
     id:chararray, 
-    words:chararray, 
+    review:chararray, 
     aspect:chararray, 
     category:chararray, 
     sentiment:chararray
 );
 
 -- ==============================
--- 2. REMOVE NULL
+-- 2. FILTER
 -- ==============================
 data = FILTER data BY 
-    (words IS NOT NULL) AND 
+    (review IS NOT NULL) AND 
     (category IS NOT NULL) AND 
     (aspect IS NOT NULL);
 
 -- ==============================
--- 3. SPLIT WORDS
+-- 3. SPLIT WORD (ĐÃ SỬA)
 -- ==============================
+-- Thay STRSPLIT thành TOKENIZE để tách các từ được nối bằng dấu phẩy thành nhiều dòng
 tokens = FOREACH data GENERATE
-    FLATTEN(STRSPLIT(words, ',')) AS word,
+    FLATTEN(TOKENIZE(review, ',')) AS word,
     category,
     aspect;
 
 -- ==============================
--- 4. CLEAN WORD
+-- 4. CLEAN
 -- ==============================
 tokens_clean = FILTER tokens BY 
     (word IS NOT NULL) AND 
@@ -46,7 +47,7 @@ word_count = FOREACH grp_words GENERATE
     COUNT(tokens_clean) AS freq;
 
 -- ==============================
--- 6. ORDER ANTI-CRASH
+-- 6. TOP 5
 -- ==============================
 grp_all = GROUP word_count ALL;
 
@@ -64,27 +65,28 @@ grp_category = GROUP data BY category;
 
 category_count = FOREACH grp_category GENERATE
     group AS category,
-    COUNT(data) AS total;
+    COUNT(data) AS total; -- Đếm số lượng dòng trong mỗi Category
 
 -- ==============================
--- 8. ASPECT COUNT  
+-- 8. ASPECT COUNT
 -- ==============================
 grp_aspect = GROUP data BY aspect;
 
 aspect_count = FOREACH grp_aspect GENERATE
     group AS aspect,
-    COUNT(data) AS total;
+    COUNT(data) AS total; -- Đếm số lượng dòng trong mỗi Aspect
 
 -- ==============================
--- 9. STORE OUTPUT
+-- 9. STORE
 -- ==============================
+-- Nhớ xóa các thư mục output cũ trên HDFS (nếu có) trước khi chạy lệnh này
 STORE top5_words 
 INTO '/user/anhkiet/output/bai2_top_words' 
 USING PigStorage(',');
 
 STORE category_count 
 INTO '/user/anhkiet/output/bai2_category' 
-USING PigStorage(',');
+USING PigStorage(',');  
 
 STORE aspect_count 
 INTO '/user/anhkiet/output/bai2_aspect' 

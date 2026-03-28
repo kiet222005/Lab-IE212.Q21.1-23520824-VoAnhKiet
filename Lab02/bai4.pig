@@ -1,20 +1,26 @@
 SET default_parallel 1;
 
+-- ==============================
 -- 1. LOAD
+-- ==============================
 data = LOAD '/user/anhkiet/cleaned_data' USING PigStorage(';') 
 AS (id:chararray, words:chararray, aspect:chararray, category:chararray, sentiment:chararray);
 
+-- ==============================
 -- 2. FILTER NULL
+-- ==============================
 data = FILTER data BY 
     (words IS NOT NULL) AND 
     (category IS NOT NULL) AND 
     (sentiment IS NOT NULL);
 
--- 3. SPLIT WORD
+-- ==============================
+-- 3. SPLIT WORD 
+-- ==============================
 tokens = FOREACH data GENERATE
     category,
     sentiment,
-    FLATTEN(STRSPLIT(words, ',')) AS word;
+    FLATTEN(TOKENIZE(words, ',')) AS word;
 
 tokens = FILTER tokens BY 
     (word IS NOT NULL) AND 
@@ -22,7 +28,7 @@ tokens = FILTER tokens BY
     (word != ' ');
 
 -- ==============================
--- POSITIVE
+-- POSITIVE 
 -- ==============================
 pos_tokens = FILTER tokens BY sentiment == 'positive';
 
@@ -42,7 +48,7 @@ top_pos = FOREACH grp_pos_cat {
 };
 
 -- ==============================
--- NEGATIVE
+-- NEGATIVE 
 -- ==============================
 neg_tokens = FILTER tokens BY sentiment == 'negative';
 
