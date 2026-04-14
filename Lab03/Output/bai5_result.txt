@@ -1,0 +1,14 @@
+Nghề nghiệp: Programmer      | Điểm TB: 4.25 | Tổng số lượt đánh giá: 10
+Nghề nghiệp: Designer        | Điểm TB: 4.00 | Tổng số lượt đánh giá: 13
+Nghề nghiệp: Student         | Điểm TB: 4.00 | Tổng số lượt đánh giá: 8
+Nghề nghiệp: Nurse           | Điểm TB: 3.86 | Tổng số lượt đánh giá: 11
+Nghề nghiệp: Consultant      | Điểm TB: 3.86 | Tổng số lượt đánh giá: 14
+Nghề nghiệp: Journalist      | Điểm TB: 3.85 | Tổng số lượt đánh giá: 17
+Nghề nghiệp: Artist          | Điểm TB: 3.73 | Tổng số lượt đánh giá: 11
+Nghề nghiệp: Teacher         | Điểm TB: 3.70 | Tổng số lượt đánh giá: 5
+Nghề nghiệp: Doctor          | Điểm TB: 3.69 | Tổng số lượt đánh giá: 21
+Nghề nghiệp: Lawyer          | Điểm TB: 3.65 | Tổng số lượt đánh giá: 17
+Nghề nghiệp: Salesperson     | Điểm TB: 3.65 | Tổng số lượt đánh giá: 17
+Nghề nghiệp: Accountant      | Điểm TB: 3.58 | Tổng số lượt đánh giá: 6
+Nghề nghiệp: Engineer        | Điểm TB: 3.56 | Tổng số lượt đánh giá: 18
+Nghề nghiệp: Manager         | Điểm TB: 3.47 | Tổng số lượt đánh giá: 16

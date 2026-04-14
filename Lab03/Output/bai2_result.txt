@@ -1,0 +1,12 @@
+Thể loại: Film-Noir       | Điểm TB: 4.36 | Tổng lượt rating: 7
+Thể loại: Horror          | Điểm TB: 4.00 | Tổng lượt rating: 2
+Thể loại: Mystery         | Điểm TB: 4.00 | Tổng lượt rating: 2
+Thể loại: Fantasy         | Điểm TB: 3.86 | Tổng lượt rating: 29
+Thể loại: Crime           | Điểm TB: 3.81 | Tổng lượt rating: 42
+Thể loại: Drama           | Điểm TB: 3.76 | Tổng lượt rating: 128
+Thể loại: Sci-Fi          | Điểm TB: 3.73 | Tổng lượt rating: 54
+Thể loại: Action          | Điểm TB: 3.71 | Tổng lượt rating: 54
+Thể loại: Thriller        | Điểm TB: 3.70 | Tổng lượt rating: 27
+Thể loại: Family          | Điểm TB: 3.67 | Tổng lượt rating: 18
+Thể loại: Adventure       | Điểm TB: 3.63 | Tổng lượt rating: 83
+Thể loại: Biography       | Điểm TB: 3.56 | Tổng lượt rating: 25
