@@ -1,0 +1,5 @@
+kafka-python==2.0.2
+opencv-python-headless>=4.8.0
+ultralytics>=8.0.0
+numpy>=1.23.5
+pyspark==3.5.0
